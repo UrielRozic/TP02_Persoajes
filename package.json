@@ -1,0 +1,21 @@
+{
+  "name": "tp02",
+  "version": "1.0.0",
+  "description": "tp02 de personajes",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "uriel rozic y santiago cascallar",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.18.0",
+    "i": "^0.3.7",
+    "mssql": "^8.1.0",
+    "passport": "^0.5.2",
+    "passport-jwt": "^4.0.0"
+  }
+}
