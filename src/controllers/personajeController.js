@@ -5,7 +5,7 @@ import { Authenticate } from '../common/jwt.js';
 const router = Router();
 const PersonajeService = new personajeService();
 
-router.get('/', Authenticate, async (req, res) => {
+  router.get('/', Authenticate, async (req, res) => {
     console.log(`This is a get operation`);
     
     const personaje = await PersonajeService.getPersonaje(req.query.nombre,req.query.edad);
@@ -21,11 +21,21 @@ router.get('/', Authenticate, async (req, res) => {
   
     return res.status(200).json(personaje);
   });
+  
   router.get('/characters',Authenticate, async (req, res) => {
     console.log(`Request URL Param: ${req.params.id}`);
     console.log(`This is a get operation`);
   
     const personaje = await PersonajeService.getPersonajeByIdImNo(req.params.id);
+  
+    return res.status(200).json(personaje);
+  });
+
+  router.get('/detallePersonaje/:id',Authenticate, async (req, res) => {
+    console.log(`Request URL Param: ${req.params.id}`);
+    console.log(`This is a get operation`);
+  
+    const personaje = await PersonajeService.getDetallePersonaje(req.params.id);
   
     return res.status(200).json(personaje);
   });

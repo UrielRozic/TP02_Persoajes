@@ -64,12 +64,20 @@ export class personajeService{
         const response = await pool.request()
             .input('id',sql.Int, id)
             .query (`SELECT * from ${personajeTabla}`)
+        
+        const detallePersonaje = await pool.request()
+            .input('id',sql.Int, id)
+            .query(`SELECT * from ${peliculasTabla} WHERE peliculasSeries.id = asociar.idPeliculaSeries AND personaje.id= asociar.idPersonaje and personaje.id = 3`)
+
+        
         console.log(response)
 
-        return response.recordset[0];
+        detallePersonaje.recordset[0].peliculas = response.recordset;
+
+        return detallePersonaje.recordset[0];
     }
 
-    getDetallePersonaje2 = async (id) => {
+    /*getDetallePersonaje2 = async (id) => {
         console.log('This is a function on the service');
 
         const pool = await sql.connect(config);
@@ -79,7 +87,7 @@ export class personajeService{
         console.log(response)
 
         return response.recordset[0];
-    }
+    }*/
 
 
     createPersonaje = async (Personaje) => {
