@@ -6,6 +6,8 @@ const config = {
   server: process.env.DB_SERVER,
   database: process.env.DB_NAME,
   table: process.env.DB_TABLA_PERSONAJE,
+  table: process.env.DB_TABLA_PELICULASERIES,
+  table: process.env.DB_TABLA_ASOCIAR,
   options: {
     trustServerCertificate: true,
     trustedConnection: true,

@@ -3,6 +3,8 @@ import config from '../../db.js'
 import 'dotenv/config'
 
 const personajeTabla = process.env.DB_TABLA_PERSONAJE;
+const peliculasTabla = process.env.DB_TABLA_PELICULASERIES;
+const asociarTabla = process.env.DB_TABLA_ASOCIAR;
 
 export class personajeService{
 
@@ -67,12 +69,12 @@ export class personajeService{
         
         const detallePersonaje = await pool.request()
             .input('id',sql.Int, id)
-            .query(`SELECT * from ${peliculasTabla} WHERE peliculasSeries.id = asociar.idPeliculaSeries AND personaje.id= asociar.idPersonaje and personaje.id = 3`)
+            .query(`SELECT * from ${peliculasTabla},${asociarTabla},${personajeTabla} WHERE peliculasSeries.id = asociar.idPeliculaSeries AND personaje.id= asociar.idPersonaje and personaje.id = 3`)
 
         
         console.log(response)
 
-        detallePersonaje.recordset[0].peliculas = response.recordset;
+        detallePersonaje.recordset[0].peliculasSeries = response.recordset;
 
         return detallePersonaje.recordset[0];
     }
