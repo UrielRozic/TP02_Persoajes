@@ -1,10 +1,19 @@
 import { Router } from 'express';
 import { peliculaSeriesService } from '../services/peliculaSeriesService.js';
+import { Authenticate } from '../common/jwt.js';
 
 const router = Router();
 const PeliculaSeriesService = new peliculaSeriesService();
 
-router.get('/movies', async (req, res) => {
+router.get('/movies',Authenticate, async (req, res) => {
+    console.log(`This is a get operation`);
+    
+    const peliculaSerie = await PeliculaSeriesService.getMovies();
+  
+    return res.status(200).json(peliculaSerie);
+});
+
+router.get('',Authenticate, async (req, res) => {
     console.log(`This is a get operation`);
     
     const peliculaSerie = await PeliculaSeriesService.getPelicula();
@@ -12,7 +21,15 @@ router.get('/movies', async (req, res) => {
     return res.status(200).json(peliculaSerie);
 });
 
-router.post('', async (req, res) => {
+router.get('/detallePelicula/:id',Authenticate, async (req, res) => {
+    console.log(`This is a get operation`);
+    
+    const peliculaSerie = await PeliculaSeriesService.getDetallePelicula(req.params.id);
+  
+    return res.status(200).json(peliculaSerie);
+});
+
+router.post('',Authenticate, async (req, res) => {
     console.log(`This is a post operation`);
   
     const peliculaSerie = await PeliculaSeriesService.createPelicula(req.body);
@@ -20,7 +37,7 @@ router.post('', async (req, res) => {
     return res.status(201).json(peliculaSerie);
 });
   
-router.put('/:id',async (req, res) => {
+router.put('/:id',Authenticate,async (req, res) => {
     console.log(`Request URL Param: ${req.params.id}`);
     console.log(`This is a put operation`);
   
