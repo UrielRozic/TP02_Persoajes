@@ -7,8 +7,11 @@ const PeliculaSeriesService = new peliculaSeriesService();
 
 router.get('/movies',Authenticate, async (req, res) => {
     console.log(`This is a get operation`);
+
+    let titulo=req.query.titulo
+    let orden=req.query.orden
     
-    const peliculaSerie = await PeliculaSeriesService.getMovies();
+    const peliculaSerie = await PeliculaSeriesService.getMovies(titulo,orden);
   
     return res.status(200).json(peliculaSerie);
 });

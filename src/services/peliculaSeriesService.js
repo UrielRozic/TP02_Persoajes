@@ -8,15 +8,31 @@ const asociarTabla = process.env.DB_TABLA_ASOCIAR;
 
 export class peliculaSeriesService{
 
-    getMovies = async () => {
+    getMovies = async (titulo,orden) => {
         console.log('This is a function on the service');
 
         const pool = await sql.connect(config);
-        const response = await pool.request()
-        .query(`SELECT peliculasSeries.id, peliculasSeries.imagen, peliculasSeries.titulo, peliculasSeries.fechaCreacion from ${peliculasSeriesTabla}`);
-        console.log(response)
-    
-        return response.recordset[0];
+        if(!orden){
+            if(!titulo){
+            const response = await pool.request()
+            .query(`SELECT peliculasSeries.id, peliculasSeries.imagen, peliculasSeries.titulo, peliculasSeries.fechaCreacion from ${peliculasSeriesTabla}`);
+            console.log(response)
+            return response.recordset;
+            }
+            const pool = await sql.connect(config);
+            const response2 = await pool.request()
+            .input('titulo',sql.VarChar, titulo)
+            .query(`SELECT peliculasSeries.id, peliculasSeries.imagen, peliculasSeries.titulo, peliculasSeries.fechaCreacion from ${peliculasSeriesTabla} WHERE titulo = @titulo`);
+            console.log(response2)
+            return response2.recordset[0];
+        }
+        else{
+            const pool = await sql.connect(config);
+            const response3 = await pool.request()
+            .query(`SELECT peliculasSeries.id, peliculasSeries.imagen, peliculasSeries.titulo, peliculasSeries.fechaCreacion from ${peliculasSeriesTabla} ORDER BY titulo ${orden}`);
+            console.log(response3)
+            return response3.recordset;
+        }
     }
     getPelicula = async () => {
         console.log('This is a function on the service');
@@ -47,6 +63,8 @@ export class peliculaSeriesService{
 
         return response.recordset[0];
     }
+
+
     
     createPelicula = async (Pelicula) => {
         console.log('This is a function on the service');
