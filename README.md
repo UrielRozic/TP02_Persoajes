@@ -6,4 +6,4 @@
 
 4) En cuarto lugar necesitamos generar un Token para poder probar los diferentes endPoints. Para hacer esto debemos abrir Postman, crear una nueva coleción y pasar por la URL localhost//:5000/auth/login
 
-5)En quinto lugar, para probar cada consigna hay que usar diferentes endpoints, si es para algo de algun personaje es /personaje, si es para algo de una pelicula o serie es /pelicula y si es para el token es /auth/login
+5) En quinto lugar, para probar cada consigna hay que usar diferentes endpoints, si es para algo de algun personaje es /personaje, si es para algo de una pelicula o serie es /pelicula y si es para el token es /auth/login
